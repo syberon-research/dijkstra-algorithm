@@ -1,0 +1,5 @@
+*.o
+graph-tests
+bpq-tests
+dijkstra
+
