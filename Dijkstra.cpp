@@ -6,8 +6,8 @@
 #include <set>
 #include <vector>
 
-// Time complexity: O((V + E) log V)
-// Space complexity: O(V)
+// Time complexity: O(V^2 + E log V) worst case
+// Auxiliary space complexity: O(V)
 int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
     if (g == nullptr) {
         throw std::invalid_argument("Graph pointer cannot be null");
