@@ -7,7 +7,7 @@ This project implements a graph data structure, a priority queue, and Dijkstra's
 
 - **Graph:** Stores nodes and weighted edges. Supports adding nodes and edges, checking whether nodes exist, and retrieving nodes and outgoing edges.
 - **BetterPriorityQueue:** Extends `std::priority_queue` with methods to check whether a node exists, update a node's priority, and convert queue contents to strings.
-- **Dijkstra:** Finds the shortest path between two nodes using Dijkstra's algorithm. Returns `-1` if no path exists between the specified nodes.
+- **Dijkstra:** Finds the shortest path between two nodes using Dijkstra's algorithm. Returns `-1` if no path exists between the specified nodes. Returns `0` if start and end nodes are the same.
 
 ## Compilation
 

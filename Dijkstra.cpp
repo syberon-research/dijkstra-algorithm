@@ -6,8 +6,10 @@
 #include <set>
 #include <vector>
 
-// Time complexity: O(V^2 + E log V) worst case
-// Auxiliary space complexity: O(V)
+// Time complexity: O(VE log V) worst case, accounting for the
+// linear scans in GetOutwardEdgesFrom and node lookup, as well as
+// the priority queue's Contains and Update operations.
+// Auxiliary space complexity: O(V), excluding the graph itself.
 int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
     if (g == nullptr) {
         throw std::invalid_argument("Graph pointer cannot be null");
