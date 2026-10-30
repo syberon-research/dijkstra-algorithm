@@ -30,7 +30,7 @@ class BetterPriorityQueue : public priority_queue<BPQNode> {
 public:
     bool Contains(nodekey_t key) const;
 
-    void Update(const BPQNode& updatedNode);
+    bool Update(const BPQNode& updatedNode);
 
     string ToString() const;
 

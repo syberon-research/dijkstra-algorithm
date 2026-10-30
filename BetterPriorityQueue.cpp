@@ -19,17 +19,22 @@ bool BetterPriorityQueue::Contains(nodekey_t key) const {
 }
 
 // Updates an existing node while preserving the priority queue's heap.
-void BetterPriorityQueue::Update(const BPQNode& updatedNode) {
+bool BetterPriorityQueue::Update(const BPQNode& updatedNode) {
     vector<BPQNode> nodes;
-    bool found = false;
+    bool changed = false;
 
     while (!this->empty()) {
         BPQNode node = this->top();
         this->pop();
 
         if (node.gnode == updatedNode.gnode) {
-            nodes.push_back(updatedNode);
-            found = true;
+            if (node.pri != updatedNode.pri ||
+                node.visited != updatedNode.visited) {
+                nodes.push_back(updatedNode);
+                changed = true;
+            } else {
+                nodes.push_back(node);
+            }
         } else {
             nodes.push_back(node);
         }
@@ -39,22 +44,17 @@ void BetterPriorityQueue::Update(const BPQNode& updatedNode) {
         this->push(node);
     }
 
-    if (!found) {
-        throw invalid_argument("Node not found in priority queue");
-    }
+    return changed;
 }
 
-// Returns a string representation of the queue.
+// Returns a string representation of one queue node.
 string BetterPriorityQueue::ToString() const {
     priority_queue<BPQNode> copy = *this;
     string result = "[";
-
     bool first = true;
 
     while (!copy.empty()) {
-        if (!first) {
-            result += ", ";
-        }
+        if (!first) result += ", ";
 
         result += BPQNodeToString(copy.top());
         copy.pop();
@@ -64,8 +64,6 @@ string BetterPriorityQueue::ToString() const {
     result += "]";
     return result;
 }
-
-// Returns a string representation of one queue node.
 string BetterPriorityQueue::BPQNodeToString(const BPQNode& node) {
     return "(" + to_string(node.gnode) +
            ", pri:" + to_string(node.pri) +
